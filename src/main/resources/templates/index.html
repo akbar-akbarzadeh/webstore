@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Welocme</title>
+    <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div class="h1">
+    <h1> Welcome to WebStore Home</h1>
+    <p>
+        <span th:remove="tag" th:text="'Today is: ' + ${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></span>
+    </p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <title>Prodcuts</title>
+</head>
+<body>
+
+<div class="table">
+    <h3> List of Products :</h3>
+    <br>
+</div>
+
+
+<div class="table">
+    <table border="5" class="table" style="border: #444444">
+        <thead style="border: #1C6EA4">
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Desc</th>
+            <th>Made By</th>
+            <th>Category</th>
+            <th>Units in Stock</th>
+            <th>Units in Order</th>
+            <th>Discontinued</th>
+            <th>Condition</th>
+        </tr>
+        <tbody>
+        <tr>
+            <td>Item</td>
+            <td span th:text="${product.productId}"></td>
+            <td span th:text="${product.name}"></td>
+            <td span th:text="${product.unitPrice}"></td>
+            <td span th:text="${product.description}"></td>
+            <td span th:text="${product.manufacturer}"></td>
+            <td span th:text="${product.category}"></td>
+            <td span th:text="${product.unitsInStock}"></td>
+            <td span th:text="${product.unitsInOrder}"></td>
+            <td span th:text="${product.discontinued}"></td>
+            <td span th:text="${product.condition}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+</body>
+</html>
