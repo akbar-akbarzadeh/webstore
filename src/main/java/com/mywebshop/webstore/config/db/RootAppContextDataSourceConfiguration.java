@@ -5,9 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 
@@ -28,7 +25,7 @@ public class RootAppContextDataSourceConfiguration {
     }
 
 
-    @Bean //needs configuring the context like user,pass etc
+    /*@Bean //needs configuring the context like user,pass etc
     @Description("getting a DataSource using JNDI ")
     public DataSource getJndiDataSource() {
 
@@ -45,7 +42,7 @@ public class RootAppContextDataSourceConfiguration {
 
         }// need to be fixed, data source always returns null
         return dataSource;
-    }
+    }*/
 
 }
 
