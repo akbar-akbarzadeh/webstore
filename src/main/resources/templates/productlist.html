@@ -31,7 +31,7 @@
             <th>Condition</th>
         </tr>
         <tbody>
-        <tr>
+        <tr th:each="product: ${productlist}">
             <td>Item</td>
             <td span th:text="${product.productId}"></td>
             <td span th:text="${product.name}"></td>

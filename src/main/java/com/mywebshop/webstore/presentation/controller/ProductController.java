@@ -1,15 +1,24 @@
 package com.mywebshop.webstore.presentation.controller;
 
+import com.mywebshop.webstore.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ProductController {
+
+    @Autowired
+    ProductService productService;
+
     @RequestMapping("/products")
-    public String listProducts(Model model) {
-        /*Product product = new Product("123","iPhone", new BigDecimal(5000));
-        model.addAttribute("product",product);*/
+    public String listAllProducts(Model model) {
+
+        //productService.finAllProducts().forEach(product -> model.addAttribute("products",product));
+
+        model.addAttribute("productlist", productService.finAllProducts());
+
         return "productlist";
     }
 
