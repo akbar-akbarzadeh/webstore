@@ -13,4 +13,6 @@ public interface ProductRepository {
     List<Product> findAll();
 
     Optional<Product> findbyID(String id);
+
+    Boolean save(Product product);
 }

@@ -21,6 +21,13 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
 
+    //TODO : needs implememntation
+    @Override
+    public Boolean save(Product product) {
+        return null;
+    }
+
+
     @Override
     public List<Product> findAll() {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -32,6 +39,7 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
     public Optional<Product> findbyID(String id) {
         return Optional.empty();
     }
+
 
     private static final class ProductMapper implements RowMapper<Product> {
 

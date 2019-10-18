@@ -7,4 +7,8 @@ import java.util.List;
 public interface ProductService {
 
     List<Product> finAllProducts();
+
+    boolean insertProduct(Product product);
+
+
 }

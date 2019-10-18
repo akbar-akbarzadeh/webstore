@@ -25,7 +25,7 @@ public class MySqlJdbcProductRepositoryImpl implements ProductRepository {
     private List<Product> productList;
 
 
-//constuctor throws exception, need to be fixed
+//TODO: constuctor throws exception, need to be fixed
 /*
     public MySqlJdbcProductRepositoryImpl() throws SQLException{
 
@@ -76,15 +76,35 @@ public class MySqlJdbcProductRepositoryImpl implements ProductRepository {
     public Optional<Product> findbyID(String id) {
         return Optional.empty();
     }
+
+    @Override
+    public Boolean save(Product product) {
+        String query = "INSERT INTO PRODUCTS (ID,NAME,DESCRIPTION,UNIT_PRICE,MANUFACTURER,CATEGORY,CONDITION," +
+                "UNITS_IN_STOCK,UNITS_IN_ORDER,DISCONTINUED)" + " VALUES (?, ?, ?,?,?,?,?,?,?,?)";
+
+        try {
+            Connection connection = mySqlDatasource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, product.getProductId());
+            preparedStatement.setString(2, product.getName());
+            preparedStatement.setString(3, product.getDescription());
+            preparedStatement.setBigDecimal(4, product.getUnitPrice());
+            preparedStatement.setString(5, product.getManufacturer());
+            preparedStatement.setString(6, product.getCategory());
+            preparedStatement.setString(7, product.getCondition());
+            preparedStatement.setLong(8, product.getUnitsInStock());
+            preparedStatement.setLong(9, product.getUnitsInOrder());
+            preparedStatement.setBoolean(10, product.isDiscontinued());
+            return preparedStatement.execute();
+
+        } catch (SQLException ex) {
+
+            System.out.println("Insert Failed");
+            return Boolean.FALSE;
+        }
+
+
+    }
 }
 
 
-   /* public List<Person> select() throws Exception {
-        preparedStatement = connection.prepareStatement("select * from person");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        List<Person> personList = new ArrayList<>();
-        while (resultSet.next()) {
-            personList.add(new Person(resultSet.getLong("id"), resultSet.getString("name"), resultSet.getString("family")));
-        }
-        return personList;
-    }*/
