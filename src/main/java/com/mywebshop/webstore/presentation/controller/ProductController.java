@@ -1,7 +1,7 @@
 package com.mywebshop.webstore.presentation.controller;
 
 import com.mywebshop.webstore.domain.Product;
-import com.mywebshop.webstore.service.impl.ProductServiceImpl;
+import com.mywebshop.webstore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductController {
 
     @Autowired
-    private ProductServiceImpl productServiceImpl;
+    private ProductService productService;
 
     @RequestMapping("/products")
     public String listAllProducts(Model model) {
 
 
-        model.addAttribute("productlist", productServiceImpl.finAllProducts());
+        model.addAttribute("productlist", productService.finAllProducts());
 
         return "products";
     }
@@ -27,7 +27,7 @@ public class ProductController {
     @RequestMapping("/insertproduct")
     public String insertProduct(@ModelAttribute Product product) {
 
-        productServiceImpl.insertProduct(product);
+        productService.insertProduct(product);
 
         return "redirect:/productlist";
     }
@@ -35,7 +35,7 @@ public class ProductController {
     @RequestMapping("/products/updatestock")
 
     public String updateStock(Model model) {
-        productServiceImpl.updateStock();
+        productService.updateStock();
         return "redirect:/products";
 
 

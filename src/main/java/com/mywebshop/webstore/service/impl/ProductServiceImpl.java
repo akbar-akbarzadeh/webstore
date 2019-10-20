@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateStock() {
+    public void updateStock() { // logic is implemented in service layer
 
         List<Product> productList = productRepository.findAll();
 
