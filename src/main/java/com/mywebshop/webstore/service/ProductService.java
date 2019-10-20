@@ -10,5 +10,7 @@ public interface ProductService {
 
     boolean insertProduct(Product product);
 
+    void updateStock();
+
 
 }

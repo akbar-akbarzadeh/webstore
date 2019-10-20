@@ -15,4 +15,8 @@ public interface ProductRepository {
     Optional<Product> findbyID(String id);
 
     Boolean save(Product product);
+
+    void updateStock(String productId, long noOfUnits);
+
+
 }

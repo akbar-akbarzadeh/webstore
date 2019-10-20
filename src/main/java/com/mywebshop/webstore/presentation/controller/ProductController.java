@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductController {
 
     @Autowired
-    ProductServiceImpl productServiceImpl;
+    private ProductServiceImpl productServiceImpl;
 
     @RequestMapping("/products")
     public String listAllProducts(Model model) {
@@ -30,6 +30,15 @@ public class ProductController {
         productServiceImpl.insertProduct(product);
 
         return "redirect:/productlist";
+    }
+
+    @RequestMapping("/products/updatestock")
+
+    public String updateStock(Model model) {
+        productServiceImpl.updateStock();
+        return "redirect:/products";
+
+
     }
 
 

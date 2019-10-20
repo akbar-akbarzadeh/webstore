@@ -21,25 +21,39 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
 
-    //TODO : needs implememntation
-    @Override
-    public Boolean save(Product product) {
-        return null;
-    }
-
-
     @Override
     public List<Product> findAll() {
+
         Map<String, Object> params = new HashMap<String, Object>();
+
         List<Product> result = jdbcTemplate.query("SELECT * FROM products", params, new ProductMapper());
+
         return result;
+
     }
 
+    @Override
+    public void updateStock(String productId, long noOfUnits) {
+
+        String query = "update products set units_in_stock=:unitsInStock where id=:id";
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("unitsInStock", noOfUnits);
+        queryParams.put("id", productId);
+        jdbcTemplate.update(query, queryParams);
+        System.out.println("update completed");
+    }
+
+    //TODO : needs implementation
     @Override
     public Optional<Product> findbyID(String id) {
         return Optional.empty();
     }
 
+    //TODO : needs implememntation
+    @Override
+    public Boolean save(Product product) {
+        return null;
+    }
 
     private static final class ProductMapper implements RowMapper<Product> {
 
@@ -59,5 +73,10 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
             return product;
         }
     }
+
+
+
+
+
 }
 

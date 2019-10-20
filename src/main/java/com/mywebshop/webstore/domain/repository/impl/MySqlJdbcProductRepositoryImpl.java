@@ -105,6 +105,11 @@ public class MySqlJdbcProductRepositoryImpl implements ProductRepository {
 
 
     }
+
+    @Override
+    public void updateStock(String productId, long noOfUnits) {
+        //TODO: needs implementation
+    }
 }
 
 

@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    @Qualifier("mySqlJdbcProductRepositoryImpl")
+    @Qualifier("springJdbcProductRepositoryImpl")
     private ProductRepository productRepository;
 
     public List<Product> finAllProducts() {
@@ -24,6 +24,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean insertProduct(Product product) {
         return productRepository.save(product);
+    }
+
+    @Override
+    public void updateStock() {
+
+        List<Product> productList = productRepository.findAll();
+
+        productList.forEach(product -> {
+
+                    if (product.getUnitsInStock() < 500) {
+                        productRepository.updateStock(product.getProductId(), product.getUnitsInStock() + 1000);
+                    }
+                }
+        );
+
+
     }
 
 
