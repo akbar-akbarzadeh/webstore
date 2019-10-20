@@ -46,7 +46,7 @@ public class SpringJdbcCustomerRepositoryImpl implements CustomerRepository {
             customer.setId(resultSet.getInt("ID"));
             customer.setName(resultSet.getString("NAME"));
             customer.setAddress(resultSet.getString("ADDRESS"));
-            customer.setNoOfOrdersMade(resultSet.getInt("noOfOrdersMade"));
+            customer.setNoOfOrdersMade(resultSet.getInt("NO_OF_ORDERS_MADE"));
             return customer;
 
 

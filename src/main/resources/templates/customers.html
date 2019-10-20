@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link href="static/css/bootstrap.css" media="all" rel="stylesheet">
+
+    <!--
+        <table class="table table-bordered">
+    -->
+    <!--
+        <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css">
+    -->
+    <title>Customers</title>
+</head>
+<body>
+
+<div class="table">
+    <h3> List of Customers :</h3>
+    <br>
+</div>
+
+
+<div class="table">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">No of Orders Made</th>
+
+        </tr>
+        <tbody>
+        <tr class="table-info" th:each="customer: ${customerslist}">
+            <td>Item</td>
+            <td span th:text="${customer.id}"></td>
+            <td span th:text="${customer.name}"></td>
+            <td span th:text="${customer.address}"></td>
+            <td span th:text="${customer.noOfOrdersMade}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+</body>
+</html>
