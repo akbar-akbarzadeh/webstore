@@ -53,6 +53,16 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
 
     }
 
+    @Override
+    public List<Product> findByBrandAndCategory(List<String> brand, List<String> category) {
+        String query =
+                "Select * from products where MANUFACTURER in ";
+        Map<String, Object> params = new HashMap<>();
+        params.putAll();
+
+        return null;
+    }
+
     //TODO : needs implementation
     @Override
     public Optional<Product> findbyID(String id) {

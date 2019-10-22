@@ -20,5 +20,7 @@ public interface ProductRepository {
 
     void updateStock(String productId, long noOfUnits);
 
+    List<Product> findByBrandAndCategory(String brand, String category);
+
 
 }
