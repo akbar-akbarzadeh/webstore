@@ -5,9 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/home")
 public class HomeController {
 
-    @RequestMapping("/home")
+    @RequestMapping() //default request mapping
     public String showHomePage(Model model) {
 
         model.addAttribute("greeting", " Welcome to Web Store!");

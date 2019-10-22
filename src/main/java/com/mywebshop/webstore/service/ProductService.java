@@ -12,5 +12,7 @@ public interface ProductService {
 
     void updateStock();
 
+    List<Product> findProductsByCategory(String category);
+
 
 }

@@ -22,6 +22,16 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
 
 
     @Override
+    public List<Product> findByCategory(String category) {
+
+        String query = "Select * from products where category=:category";
+        Map<String,Object> param = new HashMap<>();
+        param.put("category",category);
+        List<Product> result = jdbcTemplate.query(query,param,new SpringJdbcProductRepositoryImpl.ProductMapper());
+        return result;
+    }
+
+    @Override
     public List<Product> findAll() {
 
         Map<String, Object> params = new HashMap<String, Object>();

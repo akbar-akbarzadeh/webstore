@@ -72,9 +72,14 @@ public class MySqlJdbcProductRepositoryImpl implements ProductRepository {
     }
 
 
-    @Override
+    @Override //todo: needs implementation
     public Optional<Product> findbyID(String id) {
         return Optional.empty();
+    }
+
+    @Override //todo: needs implementation
+    public List<Product> findByCategory(String category) {
+        return null;
     }
 
     @Override
