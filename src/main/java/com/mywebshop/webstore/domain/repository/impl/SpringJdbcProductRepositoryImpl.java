@@ -40,7 +40,7 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
         queryParams.put("unitsInStock", noOfUnits);
         queryParams.put("id", productId);
         jdbcTemplate.update(query, queryParams);
-        System.out.println("update completed");
+
     }
 
     //TODO : needs implementation
