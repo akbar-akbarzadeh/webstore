@@ -21,6 +21,22 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
 
+    /*Product RowMapper*/
+
+    @Override
+    public List<Product> findByParams(Map<String, List<String>> params) {
+
+        String query = "select * from products where manufacturer in (:brands) or category in (:categories)";
+
+        List<Product> result = jdbcTemplate.query(query, params, new ProductMapper());
+
+
+        return result;
+
+    }
+
+
+
     @Override
     public List<Product> findByCategory(String category) {
 
@@ -30,6 +46,7 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
         List<Product> result = jdbcTemplate.query(query,param,new SpringJdbcProductRepositoryImpl.ProductMapper());
         return result;
     }
+
 
     @Override
     public List<Product> findAll() {
@@ -42,6 +59,7 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
 
     }
 
+
     @Override
     public void updateStock(String productId, long noOfUnits) {
 
@@ -53,26 +71,16 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
 
     }
 
-    @Override
-    public List<Product> findByBrandAndCategory(List<String> brand, List<String> category) {
-        String query =
-                "Select * from products where MANUFACTURER in ";
-        Map<String, Object> params = new HashMap<>();
-        params.putAll();
-
-        return null;
-    }
-
     //TODO : needs implementation
     @Override
     public Optional<Product> findbyID(String id) {
-        return Optional.empty();
-    }
 
-    //TODO : needs implememntation
-    @Override
-    public Boolean save(Product product) {
-        return null;
+        String query = "select * from products where id=:productId";
+        Map<String, Object> params = new HashMap<>();
+        params.put("productId", id);
+        Optional<Product> product = Optional.of(jdbcTemplate.query(query, params, new ProductMapper()).get(0));
+
+        return product;
     }
 
     private static final class ProductMapper implements RowMapper<Product> {
@@ -94,8 +102,11 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
         }
     }
 
-
-
+    //TODO : needs implememntation
+    @Override
+    public Boolean save(Product product) {
+        return null;
+    }
 
 
 }

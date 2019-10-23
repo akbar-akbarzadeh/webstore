@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+          rel="stylesheet">
+    <title>Products</title></head>
+<body>
+<section>
+    <div class="jumbotron">
+        <div class="container"><h1>Products</h1>
+        </div>
+    </div>
+</section>
+<section class="container">
+    <div class="row">
+        <div class="col-md-5">
+            </span>
+            <h3 th:text="${product.name}"></h3>
+            <p th:text="${product.description}"></p>
+            <p><strong>Item Code : </strong><span class="label label-warning"/> <span th:text="${product.productId}"/>
+            </p>
+            <p><strong>manufacturer</strong> : <span th:text="${product.manufacturer}"/></p>
+            <p><strong>category</strong> : <span th:text="${product.category}"/></p>
+            <p><strong>Availble units in stock </strong> : <span th:text="${product.unitsInStock}"/></p>
+            <h4><span th:text="${product.unitPrice}"/> USD</h4>
+            <p><a class="btn btn-warning btn-large" href="#"><span class="glyphicon-shopping-cart glyphicon"> </span>
+                Order Now !</a></p>
+        </div>
+    </div>
+</section>
+</body>
+</html>

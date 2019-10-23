@@ -5,10 +5,11 @@ import com.mywebshop.webstore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/market")
@@ -55,4 +56,55 @@ public class ProductController {
         return  modelAndView; //return modelAndView object
 
     }
+
+    @RequestMapping("/products/filter/{params}")
+
+    //http://localhost:8080/market/products/filter/params;brands=Google,Dell;categories=Tablet,Laptop
+    //http://localhost:8080/market/products/filter/params;brands=Google;brands=Dell;categories=Tablet;categories=Laptop
+
+    public ModelAndView getProductsByBrandAndCategory(@MatrixVariable(pathVar = "params") Map<String, List<String>> params) {
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("productlist", productService.findProductsByFilterParams(params));
+        modelAndView.setViewName("products");
+
+        return modelAndView;
+
+
+    }
+
+    //an example of 2 segments of matrix value
+    @RequestMapping("/products/filter/{params}/{prices}")
+
+    //http://localhost:8080/market/products/filter/params;brands=Google,Dell;categories=Tablet,Laptop/price;price=500,300
+
+    public ModelAndView getProductsByBrandAndCategoryAndPrice
+    (@MatrixVariable(pathVar = "params") Map<String, List<String>> params,
+     @MatrixVariable(pathVar = "prices") Map<String, List<String>> prices) {
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("productlist", productService.findProductsByFilterParams(params));
+        modelAndView.setViewName("products");
+
+        return modelAndView;
+
+
+    }
+
+    @RequestMapping("/product")
+    //http://localhost:8080/market/product?productid=P1234
+    public ModelAndView getProductsById(@RequestParam("productid") String productID) {
+
+
+        System.out.println(productService.findProductById(productID).get());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("product", productService.findProductById(productID).get());
+        modelAndView.setViewName("product");
+
+        return modelAndView;
+    }
+
+
 }

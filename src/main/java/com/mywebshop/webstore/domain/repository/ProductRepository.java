@@ -4,6 +4,7 @@ import com.mywebshop.webstore.domain.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -20,7 +21,7 @@ public interface ProductRepository {
 
     void updateStock(String productId, long noOfUnits);
 
-    List<Product> findByBrandAndCategory(String brand, String category);
+    List<Product> findByParams(Map<String, List<String>> params);
 
 
 }

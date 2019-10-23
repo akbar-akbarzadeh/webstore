@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -43,9 +45,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Optional<Product> findProductById(String productId) {
+        return productRepository.findbyID(productId);
+    }
+
+    @Override
     public List<Product> findProductsByCategory(String category) {
         return productRepository.findByCategory(category);
     }
 
-
+    @Override
+    public List<Product> findProductsByFilterParams(Map<String, List<String>> params) {
+        return productRepository.findByParams(params);
+    }
 }

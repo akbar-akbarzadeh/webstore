@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -115,6 +116,14 @@ public class MySqlJdbcProductRepositoryImpl implements ProductRepository {
     public void updateStock(String productId, long noOfUnits) {
         //TODO: needs implementation
     }
+
+    @Override
+    public List<Product> findByParams(Map<String, List<String>> params) {
+        return null;
+    }
+
+
+
 }
 
 
