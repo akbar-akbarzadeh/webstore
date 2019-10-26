@@ -106,5 +106,17 @@ public class ProductController {
         return modelAndView;
     }
 
+    @RequestMapping("/products/add/showform")
+    public String getAddNewProductForm(Model model) {
 
+        Product product = new Product(); //instantiate the product and send it to view
+        model.addAttribute("newProduct", product);
+        return "addProduct";
+    }
+
+    @RequestMapping("/products/add/processform")
+    public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct) {
+        productService.insertProduct(newProduct);
+        return "redirect:/market/products";
+    }
 }

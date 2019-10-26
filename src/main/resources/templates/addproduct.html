@@ -1,0 +1,112 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html;
+charset=ISO-8859-1" http-equiv="Content-Type">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/
+bootstrap.min.css"
+          rel="stylesheet">
+    <title>Products</title>
+</head>
+<body>
+<section>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Products</h1>
+            <p>Add products</p>
+        </div>
+    </div>
+</section>
+<section class="container">
+    <form action="#" class="form-horizontal" method="POST" th:action="@{/market/products/add/processform}"
+          th:object="${newProduct}">
+
+        <fieldset>
+            <legend>Add new product</legend>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-lg-2"
+                       for="productId">Product Id</label>
+                <div class="col-lg-10">
+                    <input class="form:input-large" id="productId" th:value="*{productId}" type="text"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-lg-2"
+                       for="name">Name</label>
+                <div class="col-lg-10">
+                    <input class="form:input-large" id="name" th:value="*{name}" type="text"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-lg-2"
+                       for="unitPrice">Unit Price</label>
+                <div class="col-lg-10">
+                    <input class="form:input-large" id="unitPrice" th:value="*{unitPrice}" type="text"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-lg-2"
+                       for="manufacturer">Manufacturer</label>
+                <div class="col-lg-10">
+                    <input class="form:input-large" id="manufacturer" th:value="*{manufacturer}" type="text"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-lg-2"
+                       for="category">Category</label>
+                <div class="col-lg-10">
+                    <input class="form:input-large" id="category" th:value="*{category}" type="text"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-lg-2"
+                       for="unitsInStock">Units In Stock</label>
+                <div class="col-lg-10">
+                    <input class="form:input-large" id="unitsInStock" th:value="*{unitsInStock}" type="text"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2 col-lg-2"
+                       for="unitsInOrder">Units in Order</label>
+                <div class="col-lg-10">
+                    <input class="form:input-large" id="unitsInOrder" th:value="*{unitsInOrder}" type="text"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-lg-2"
+                       for="description">Description</label>
+                <div class="col-lg-10">
+                    <textarea id="description" rows="2" th:value="*{description}"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2"
+                       for="discontinued">Discontinued</label>
+                <div class="col-lg-10">
+                    <input id="discontinued" th:value="discontinued" type="checkbox"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-2"
+                       for="condition">Condition</label>
+                <div class="col-lg-10" id="condition">
+                    <input th:value="condition" type="radio"
+                           value="New"/>New
+                    <input th:value="condition" type="radio"
+                           value="Old"/>Old
+                    <input th:value="condition" type="radio"
+                           value="Refurbished"/>Refurbished
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <input class="btn
+btn-primary" id="btnAdd" type="submit" value="Add"/>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</section>
+</body>
+</html>
