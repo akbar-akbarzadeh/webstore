@@ -15,7 +15,7 @@ public class Product {
     private String category;
     private long unitsInStock;
     private long unitsInOrder;
-    private boolean discontinued;
+    private Boolean discontinued;
     private String condition;
 
 

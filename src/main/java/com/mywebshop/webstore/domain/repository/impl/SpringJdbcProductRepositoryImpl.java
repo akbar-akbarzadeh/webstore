@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -104,9 +105,22 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
 
 
     @Override
+    @Transactional
     public Boolean save(Product product) {
 
-        String query = "INSERT INTO PRODUCTS "
+        String query = "INSERT INTO PRODUCTS (ID, "
+                + "NAME,"
+                + "DESCRIPTION,"
+                + "UNIT_PRICE,"
+                + "MANUFACTURER,"
+                + "CATEGORY,"
+                + "CONDITIONS,"
+                + "UNITS_IN_STOCK,"
+                + "UNITS_IN_ORDER,"
+                + "DISCONTINUED) "
+                + "VALUES (:id, :name, :desc, :price,:manufacturer, :category, :condition, :inStock,:inOrder, :discontinued)";
+
+        /*String query = "INSERT INTO PRODUCTS "
                 + "(ID, "
                 + "NAME,"
                 + "DESCRIPTION,"
@@ -117,7 +131,7 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
                 + "UNITS_IN_STOCK,"
                 + "UNITS_IN_ORDER,"
                 + "DISCONTINUED) "
-                + "VALUES (:id, :name, :desc, :price,:manufacturer, :category, :condition, :inStock,:inOrder, :discontinued)";
+                + "VALUES (:id, :name, :desc, :price,:manufacturer, :category, :condition, :inStock,:inOrder, :discontinued)";*/
 
         Map<String, Object> params = new HashMap<>();
 
@@ -130,13 +144,17 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
         params.put("condition", product.getCondition());
         params.put("inStock", product.getUnitsInStock());
         params.put("inOrder", product.getUnitsInOrder());
-        params.put("discontinued", product.isDiscontinued());
+        params.put("discontinued", (product.getDiscontinued()) ? 1 : 0);
 
-        jdbcTemplate.update(query, params);
+        try {
+            jdbcTemplate.update(query, params);
+            return Boolean.TRUE;
 
-        return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Boolean.FALSE;
+        }
+
     }
-
-
 }
 

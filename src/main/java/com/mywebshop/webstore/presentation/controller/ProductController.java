@@ -111,13 +111,23 @@ public class ProductController {
 
         Product product = new Product(); //instantiate the product and send it to view to fill it as ModelAttribute
         model.addAttribute("newProduct", product);
+        // instead of above code we could write
+        //public String getAddNewProductForm(@ModelAttribute("newProduct") Product product) {
+
+        //Spring MVC will know that it should create an object of
+        //Product and attach it to the model under the name product
+
         return "addProduct";
     }
 
     @PostMapping("/products/add/processform")
-    public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct) {
-        System.out.println(newProduct.toString());
-        productService.insertProduct(newProduct);
-        return "redirect:/market/products";
+    public String processAddNewProductForm(@ModelAttribute("newProduct") Product product) {
+        System.out.println(product.toString());
+        if (productService.insertProduct(product)) {
+
+            return "redirect:/market/products";
+        } else {
+            return "addProduct";
+        }
     }
 }

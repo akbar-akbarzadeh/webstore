@@ -100,7 +100,7 @@ public class MySqlJdbcProductRepositoryImpl implements ProductRepository {
             preparedStatement.setString(7, product.getCondition());
             preparedStatement.setLong(8, product.getUnitsInStock());
             preparedStatement.setLong(9, product.getUnitsInOrder());
-            preparedStatement.setBoolean(10, product.isDiscontinued());
+            preparedStatement.setBoolean(10, product.getDiscontinued());
             return preparedStatement.execute();
 
         } catch (SQLException ex) {
