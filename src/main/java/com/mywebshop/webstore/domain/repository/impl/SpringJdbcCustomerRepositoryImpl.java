@@ -38,6 +38,30 @@ public class SpringJdbcCustomerRepositoryImpl implements CustomerRepository {
         return Optional.empty();
     }
 
+    @Override
+    public Boolean save(Customer customer) {
+
+        String query = "insert into customers (ID,NAME,ADDRESS,NO_OF_ORDERS_MADE)" +
+                "values (:id,:name,:address,:noOfOrdersmade)";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", customer.getId());
+        params.put("name", customer.getName());
+        params.put("address", customer.getAddress());
+        params.put("noOfOrdersmade", customer.getNoOfOrdersMade());
+
+        try {
+
+            jdbcTemplate.update(query, params);
+            return Boolean.TRUE;
+
+        } catch (Exception e) {
+
+            return Boolean.FALSE;
+        }
+
+    }
+
     private static final class CustomerMapper implements RowMapper<Customer> {
 
         public Customer mapRow(ResultSet resultSet, int rowNum) throws SQLException {

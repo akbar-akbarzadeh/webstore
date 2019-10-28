@@ -10,4 +10,6 @@ public interface CustomerRepository {
     List<Customer> findAll();
 
     Optional<Customer> findOne(Integer id);
+
+    Boolean save(Customer customer);
 }

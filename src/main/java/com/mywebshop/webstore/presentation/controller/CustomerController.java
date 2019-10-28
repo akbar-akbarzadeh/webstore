@@ -1,9 +1,13 @@
 package com.mywebshop.webstore.presentation.controller;
 
+import com.mywebshop.webstore.domain.Customer;
 import com.mywebshop.webstore.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -19,4 +23,22 @@ public class CustomerController {
 
         return "customers";
     }
+
+    @GetMapping("/customers/add/form")
+    public String addCustomerShowForm(@ModelAttribute("newCustomer") Customer newCustomer) {
+
+        return "addcustomer";
+    }
+
+    @PostMapping("/customers/add/form")
+    public String addCustomerProcessForm(@ModelAttribute("newCustomer") Customer newCustomer) {
+
+        if (customerService.addCustomer(newCustomer)) {
+
+            return "redirect:/customers";
+        } else {
+            return "addcustomer";
+        }
+    }
+
 }
