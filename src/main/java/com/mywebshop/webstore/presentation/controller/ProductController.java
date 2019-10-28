@@ -5,6 +5,9 @@ import com.mywebshop.webstore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -121,8 +124,14 @@ public class ProductController {
     }
 
     @PostMapping("/products/add/processform")
-    public String processAddNewProductForm(@ModelAttribute("newProduct") Product product) {
-        System.out.println(product.toString());
+    public String processAddNewProductForm(@ModelAttribute("newProduct") Product product, BindingResult result) {
+
+        String[] suppressedFields = result.getSuppressedFields();
+
+        if (suppressedFields.length > 0) {
+            throw new RuntimeException("Attempting to bind disallowed fields: " +
+                    StringUtils.arrayToCommaDelimitedString(suppressedFields));
+        }
         if (productService.insertProduct(product)) {
 
             return "redirect:/market/products";
@@ -130,4 +139,11 @@ public class ProductController {
             return "addProduct";
         }
     }
+
+    @InitBinder // controller hook method
+    public void configureBinder(WebDataBinder webDataBinder) {
+
+        webDataBinder.setDisallowedFields("discontinued", "unitsInOrder");
+    }
+
 }

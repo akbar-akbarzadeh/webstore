@@ -144,7 +144,7 @@ public class SpringJdbcProductRepositoryImpl implements ProductRepository {
         params.put("condition", product.getCondition());
         params.put("inStock", product.getUnitsInStock());
         params.put("inOrder", product.getUnitsInOrder());
-        params.put("discontinued", (product.getDiscontinued()) ? 1 : 0);
+        params.put("discontinued", product.getDiscontinued() ? 1 : 0);
 
         try {
             jdbcTemplate.update(query, params);

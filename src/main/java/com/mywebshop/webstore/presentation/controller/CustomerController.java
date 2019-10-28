@@ -26,7 +26,7 @@ public class CustomerController {
 
     @GetMapping("/customers/add/form")
     public String addCustomerShowForm(@ModelAttribute("newCustomer") Customer newCustomer) {
-
+        // since we use @ModelAttribute here, no need to instantiate Customer,Spring MVC will do it for us
         return "addcustomer";
     }
 
