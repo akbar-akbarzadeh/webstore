@@ -2,8 +2,13 @@ package com.mywebshop.webstore.config;
 
 import com.mywebshop.webstore.config.db.RootAppContextDataSourceConfiguration;
 import com.mywebshop.webstore.config.template.ViewTemplateEngine;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
+@Configuration
 public class DispatcherInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
@@ -19,5 +24,11 @@ public class DispatcherInitializer extends AbstractAnnotationConfigDispatcherSer
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
     }
 }
