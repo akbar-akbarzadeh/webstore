@@ -1,6 +1,7 @@
 package com.mywebshop.webstore.domain;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -17,6 +18,10 @@ public class Product {
     private long unitsInOrder;
     private Boolean discontinued;
     private String condition;
+    private MultipartFile productImage;
 
 
+    public Product() {
+        this.discontinued = Boolean.FALSE;
+    }
 }

@@ -2,6 +2,7 @@ package com.mywebshop.webstore.presentation.controller;
 
 import com.mywebshop.webstore.domain.Product;
 import com.mywebshop.webstore.service.ProductService;
+import com.mywebshop.webstore.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +10,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +23,8 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private StorageService storageService;
 
     @RequestMapping("/products")
     public String listAllProducts(Model model) {
@@ -124,7 +129,14 @@ public class ProductController {
     }
 
     @PostMapping("/products/add/processform")
-    public String processAddNewProductForm(@ModelAttribute("newProduct") Product product, BindingResult result) {
+    public String processAddNewProductForm
+            (@ModelAttribute("newProduct") Product product, BindingResult result, MultipartFile file, HttpServletRequest request) {
+
+
+        System.out.println(product.toString());
+        /*System.out.println(file.toString());
+        System.out.println(file.getOriginalFilename());*/
+
 
         String[] suppressedFields = result.getSuppressedFields();
 
@@ -134,6 +146,7 @@ public class ProductController {
         }
         if (productService.insertProduct(product)) {
 
+            storageService.store(file);
             return "redirect:/market/products";
         } else {
             return "addProduct";

@@ -13,8 +13,12 @@
 </section>
 <section class="container">
     <div class="row">
-        <div class="col-md-5">
-            </span>
+        <div class="col-md-10">
+
+            <div class="col-md-5">
+                <img alt="image" style="width:100%" th:src="@{${'/img/'+ product.productId+ '.jpg'}}"/>
+            </div>
+
             <h3 th:text="${product.name}"></h3>
             <p th:text="${product.description}"></p>
             <p><strong>Item Code : </strong><span class="label label-warning"/> <span th:text="${product.productId}"/>
@@ -23,8 +27,8 @@
             <p><strong>category</strong> : <span th:text="${product.category}"/></p>
             <p><strong>Availble units in stock </strong> : <span th:text="${product.unitsInStock}"/></p>
             <h4><span th:text="${product.unitPrice}"/> USD</h4>
-            <p><a class="btn btn-warning btn-large" href="#"><span class="glyphicon-shopping-cart glyphicon"> </span>
-                Order Now !</a></p>
+            <p><a class="btn btn-warning btn-large" href="#"><span class="glyphicon-shopping-cart glyphicon">  <!--Order Now !-->
+            </span> Order Now ! </a></p>
         </div>
     </div>
 </section>
