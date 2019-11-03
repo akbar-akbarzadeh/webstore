@@ -130,7 +130,7 @@ public class ProductController {
 
     @PostMapping("/products/add/processform")
     public String processAddNewProductForm
-            (@ModelAttribute("newProduct") Product product, BindingResult result, MultipartFile file, HttpServletRequest request) {
+            (@ModelAttribute("newProduct") Product product, BindingResult result, @RequestParam MultipartFile file, HttpServletRequest request) {
 
 
         System.out.println(product.toString());
