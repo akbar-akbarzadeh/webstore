@@ -56,7 +56,7 @@ public class ViewTemplateEngine {
     @Description("Spring Message Resolver")
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("classpath*:/templates/messages");
+        messageSource.setBasename("classpath:/templates/messages/");
 
         return messageSource;
     }
